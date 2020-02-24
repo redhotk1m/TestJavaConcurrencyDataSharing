@@ -1,90 +1,7 @@
-import javax.swing.*;
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Main {
-
-    public static void main(String[] args) {
-        Client abc = new Client();
-        JFrame frame = new JFrame("Overlay");
-
-        // Canvas, to have a video and on top a button
-        final Canvas canvas = new Canvas();
-        Button button = new Button();
-        button.setBounds(10,10, 100, 40);
-        canvas.setPreferredSize(new Dimension(200, 200));
-
-        // Layout
-        JPanel content = new JPanel(new GridLayout(2,1));
-        //content.add(canvas);
-        JButton CS1 = new JButton("Client sends 1");
-        JButton CS2 = new JButton("Client sends 2");
-        JButton CR1 = new JButton("Client receives SYN-ACK 1");
-        JButton CR2 = new JButton("Client receives SYN-ACK 2");
-        CS1.addActionListener(e -> {
-            try {
-                abc.sendPacketTest(new Packet("KIM","0","SYN"));
-            } catch (InterruptedException ex) {
-                ex.printStackTrace();
-            }
-        });
-        CS2.addActionListener(e -> {
-            try {
-                abc.sendPacketTest(new Packet("KIM2","1","SYN"));
-            } catch (InterruptedException ex) {
-                ex.printStackTrace();
-            }
-        });
-        CR1.addActionListener(e -> {
-            try {
-                abc.recievePacketTest(new Packet("KIM","0","SYN"));
-            } catch (InterruptedException ex) {
-                ex.printStackTrace();
-            }
-        });
-        CR2.addActionListener(e -> {
-            try {
-                abc.recievePacketTest(new Packet("KIM2","1","SYN"));
-            } catch (InterruptedException ex) {
-                ex.printStackTrace();
-            }
-        });
-        content.add(CS1);  // for empty cell
-        content.add(CS2);  // for empty cell
-        content.add(CR1);  // for empty cell
-        content.add(CR2);  // for empty cell
-
-        // Show
-        frame.add(content);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
-
-        /*while (true) {
-            Scanner scanner = new Scanner(System.in);
-            //Sends packet to server
-            //Receives syn-ack from server (Packet with TCP syn-ack)
-            String input = scanner.nextLine();
-            String[] a = input.split(";");
-            Packet packet = new Packet(a[0], a[1], a[2]);
-            MainClass abc = new MainClass();
-            try {
-                abc.sendPacketTest(packet);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            //recievePacketTest(packet);
-            //recievePacketTest(packet);
-            //recievePacketTest(packet);
-
-            //sendPacket(input);
-        }*/
-    }
-}
-
-/*class Client {
-
+public class Client {
         static int TCPClients = 0;
         static boolean isReady = false;
         static ArrayList<Packet> TCPList = new ArrayList<>();
@@ -189,7 +106,7 @@ public class Main {
                 new TCP(one);
             }
         }
-    }
+    }*/
 
         public TCP2 packetLookup(Packet packet) {
             for (TCP2 tcp2 : TCPList2) {
@@ -214,17 +131,5 @@ public class Main {
         public synchronized void removeTCPPacket(Packet packet) {
             TCPList.remove(packet);
         }
-    }*/
+    }
 
-    /*class Server{
-
-
-        public void sendPacket(){
-
-        }
-
-        public void receivePacket(){
-
-        }
-
-    }*/
