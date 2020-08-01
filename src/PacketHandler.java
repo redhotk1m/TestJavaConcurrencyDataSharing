@@ -1,7 +1,4 @@
-package Test;
-
 import java.net.DatagramPacket;
-import java.net.DatagramSocket;
 import java.util.Queue;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -24,27 +21,34 @@ public class PacketHandler implements Runnable {
     @Override
     public void run() {
         Random rand = new Random();
+        int s = 0;
+        int k = 0;
+        long startTime = 0;
         while (serverThread.isAlive()) {
             DatagramPacket packet = packetQueue.poll();
-            //packet = packetQueue.poll();
             if (packet != null) {
-                //String a = new String(packet.getData());
+                //if (s<1){
+                //    s++;
+                //    startTime = System.currentTimeMillis();
+               // }
                 Packet receivedPacket = new Packet(packet.getData());
                 receivedPacket.type="SYN-ACK";
                 DatagramPacket respPacket = new DatagramPacket(receivedPacket.getData(),receivedPacket.getData().length,packet.getAddress(),packet.getPort());
-                //DatagramPacket responsePacket = new DatagramPacket(a.getBytes(),a.getBytes().length,packet.getAddress(),packet.getPort());
                 if (receivedPacket.name.equals("resent"))
                     ServerMain.resentPackets.incrementAndGet();
-                if (rand.nextInt(50)<40)
+                if (rand.nextInt(50)<25) {
                     server.sendPacket(respPacket);
-                System.out.println(packetsHandled.incrementAndGet());
-                //System.out.println("I am handling packet: " + packetsHandled.incrementAndGet() + " " + Thread.currentThread().getName() + " data: " + a);
-            }  //Thread.sleep(1000);
-            //calculateLoss(packetsHandled);
+                    System.out.println("Resent: " + ++k);
+                }
+                System.out.println("Received: " + packetsHandled.incrementAndGet());
+                //if (packetsHandled.get() > 89999) {
+                //    System.out.println(System.currentTimeMillis() - startTime);
+                //}
+
+            }
         }
         System.out.println("Serverthread is dead, calculating now");
         System.out.println("Received a total of " + packetsHandled + " and resent: " + ServerMain.resentPackets);
-        //calculateLoss(packetsHandled);
     }
 
     private void calculateLoss(AtomicInteger packetsReceiveds){

@@ -1,5 +1,3 @@
-package Test;
-
 import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.util.concurrent.Delayed;

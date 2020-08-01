@@ -1,5 +1,3 @@
-package Test;
-
 import java.net.DatagramPacket;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -34,9 +32,9 @@ public class ServerMain {
         Thread packetHandlerThread3 = new Thread(packetHandler3);
 
         packetHandlerThread.start();
-        packetHandlerThread1.start();
-        packetHandlerThread2.start();
-        packetHandlerThread3.start();
+        //packetHandlerThread1.start();
+        //packetHandlerThread2.start();
+        //packetHandlerThread3.start();
     }
 
 

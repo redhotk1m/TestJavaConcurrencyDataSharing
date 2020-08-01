@@ -1,6 +1,3 @@
-package Test;
-
-import javax.print.PrintServiceLookup;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -37,7 +34,7 @@ public class WaitForResponse extends Thread implements Delayed {
                 //System.out.println("Waiting for response");
                 sleep(5000);
             } catch (InterruptedException e) {
-                //System.out.println("Packet received, waiting thread: " + this.getName() + " is closing");
+                //System.out.println("Old.Packet received, waiting thread: " + this.getName() + " is closing");
                 return;
             }
             if (!Thread.interrupted()) {

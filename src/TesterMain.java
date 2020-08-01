@@ -1,5 +1,3 @@
-package Test;
-
 public class TesterMain {
     public static void main(String[] args) {
         new Thread(() -> {
